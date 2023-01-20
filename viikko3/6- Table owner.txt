@@ -1,0 +1,23 @@
+ CREATE TABLE owner; 
+ desc owner;
+ | Field | Type | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+----------------+
+| first_name | varchar(255) | YES | | NULL | |
+| last_name | varchar(255) | YES | | NULL | |
+| address | varchar(255) | YES | | NULL | |
+| ownerID | int(11) | NO | PRI | NULL | auto_increment |
++------------+--------------+------+-----+---------+----------------+
+ALTER TABLE pet DROP COLUMN owner;
+ALTER TABLE pet ADD COLUMN petID INT PRIMARY KEY AUTO_INCREMENT;
+ALTER TABLE pet ADD COLUMN ownerID INT;
+> ALTER TABLE pet ADD CONSTRAINT FOREIGN KEY(ownerID) REFERENCES 
+owner(ownerID);
+desc pet;
++---------+-------------+------+-----+---------+----------------+
+| name | varchar(20) | YES | | NULL | |
+| species | varchar(20) | YES | | NULL | |
+| sex | char(1) | YES | | NULL | |
+| birth | date | YES | | NULL | |
+| death | date | YES | | NULL | |
+| petID | int(11) | NO | PRI | NULL | auto_increment |
+| ownerID | int(11) | YES | MUL | NULL | |

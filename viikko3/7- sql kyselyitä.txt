@@ -1,19 +1,44 @@
 a) Tulosta kymmenen aakkosjärjestyksessä ensimmäisen työntekijän tiedot sukunimen mukaan lajiteltuna. Vihje: LIMIT rajoittaa tulostettavien tietojen määrän.
 
+SELECT lastname FROM employees ORDER BY lastname LIMIT 10;
+
 b) Sama kuten edellä, mutta sukunimen JA etunimen mukaan lajiteltuna.
 
+Select lastname, firstname from employees orgeer by lastname, firstname LIMIT 10;
+
 c) Tulosta viiden viimeksi palkatun työntekijän tiedot.
+
+SELECT * FROM employees ORDER BY id DESC LIMIT 5;
 
 Seuraavissa tehtävissä tarvitaan tietoja useammasta kuin yhdestä taulusta (JOIN).
 
 d) Kenellä on suurin palkka ?
 
+SELECT name as department_name, MAX(salary) as max_salary
+FROM employees 
+JOIN departments  ON department_id = d.id
+GROUP BY max_salary;
+
 e) Kenellä on pienin palkka ?
+
+SELECT name as department_name, MIN(salary) as min_salary
+FROM employees 
+JOIN departments  ON department_id = d.id
+GROUP BY min_salary;
 
 f) Tulosta työntekijät, jotka ansaitsevat yli 150000.
 
+SELECT * FROM employees WHERE salary > 15000;
+
 g) Kuinka monta työntekijää työskentelee myynnissä (Sales) ? Entä markkinoinnissa (Marketing) ?
+
+SELECT COUNT(*) FROM employees WHERE department = 'sales';
+SELECT COUNT(*) FROM employees WHERE department = 'marketing';
 
 h) Tulosta kaikkien osastonjohtajien (Department Managers) etunimi, sukunimi ja osasto, jolla työskentelee.
 
+SELECT firstname, lastname, department FROM employees WHERE role = ' Department Manager';
+
 i) Mikä on myynnissä työskentelevien keskipalkka ? Entä markkinoinnissa ?
+SELECT AVG(salary) FROM employees WHERE department = 'sales';
+SELECT AVG(salary) FROM employees WHERE department = 'marketing';

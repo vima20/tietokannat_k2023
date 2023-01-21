@@ -1,0 +1,19 @@
+a) Tulosta kymmenen aakkosjärjestyksessä ensimmäisen työntekijän tiedot sukunimen mukaan lajiteltuna. Vihje: LIMIT rajoittaa tulostettavien tietojen määrän.
+
+b) Sama kuten edellä, mutta sukunimen JA etunimen mukaan lajiteltuna.
+
+c) Tulosta viiden viimeksi palkatun työntekijän tiedot.
+
+Seuraavissa tehtävissä tarvitaan tietoja useammasta kuin yhdestä taulusta (JOIN).
+
+d) Kenellä on suurin palkka ?
+
+e) Kenellä on pienin palkka ?
+
+f) Tulosta työntekijät, jotka ansaitsevat yli 150000.
+
+g) Kuinka monta työntekijää työskentelee myynnissä (Sales) ? Entä markkinoinnissa (Marketing) ?
+
+h) Tulosta kaikkien osastonjohtajien (Department Managers) etunimi, sukunimi ja osasto, jolla työskentelee.
+
+i) Mikä on myynnissä työskentelevien keskipalkka ? Entä markkinoinnissa ?

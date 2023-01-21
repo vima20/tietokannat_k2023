@@ -1,0 +1,28 @@
+a) Minkä nimisiä osastoja (Departments) Employees-tietokannassa on ?
+
+  SHOW Departments from employees;
+  
+b) Tulosta, (yhden kerran kukin) mitä nimikkeitä (title) tietokannassa on.
+
+ShOW titles from employees;
+
+c) Mikä on suurin ja pienin palkka (salary) ? VIHJE: MIN, MAX
+
+ SELECT MAX(salaries) FROM employees;
+ Select MIN(salaries) FROM employees;
+
+d) Mikä on keskimääräinen palkka ? VIHJE: AVG
+
+SELECT ROUND(AVG(salary), 2) FROM emoloyees;
+
+e) Tulosta kaikki työntekijät, joiden sukunimi on Facello.
+
+SELECT gender, COUNT(*) FROM employees GROUP BY gender;
+
+SELECT * FROM employees WHERE last_name = 'Facello';
+
+f) Kuinka moni työntekijä on syntynyt 1950-luvulla ?
+
+SELECT COUNT(*) FROM table_name WHERE YEAR(birthdate) = 1950;
+
+g) Montako miestä ja montako naista työntekijöissä on ?

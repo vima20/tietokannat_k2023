@@ -1,0 +1,20 @@
+a) Tulosta DVD-elokuvien kielet (language) aakkosjärjestyksessä
+
+SELECT DVD, language FROM sakila.film ORDER BY language;
+
+b) Tulosta kaikkien niiden näyttelijöiden elokuvat, joiden sukunimi on Temple.
+
+SELECT title FROM sakila.film 
+JOIN sakila.film_actor  ON film= film
+JOIN sakila.actor a ON actor"Temple";
+
+Select from sakila where movies
+c) Tulosta elokuvassa "Ghost Groundhog" näytelleet näyttelijät.
+Select actors FROM sakila WHERE acted in "Ghost Groundhog";
+
+d) Montako kauhuelokuvaa ("Horror") tietokannassa on ?
+
+SELECT COUNT(*) FROM sakila.film WHERE category='Horror';
+
+e) Tulosta kaikki kauhuelokuvat.
+SELECT title FROM sakila.film WHERE category='Horror';

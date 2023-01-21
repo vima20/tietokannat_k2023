@@ -1,28 +1,83 @@
 a) Minkä nimisiä osastoja (Departments) Employees-tietokannassa on ?
 
-  SHOW Departments from employees;
+mysql> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d005    | Development        |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
++---------+--------------------+
+9 rows in set (0.00 sec)
   
 b) Tulosta, (yhden kerran kukin) mitä nimikkeitä (title) tietokannassa on.
 
-ShOW titles from employees;
+mysql> select  title FROM titles GROUP BY title;
++--------------------+
+| title              |
++--------------------+
+| Assistant Engineer |
+| Senior Staff       |
+| Engineer           |
+| Staff              |
+| Technique Leader   |
+| Senior Engineer    |
+| Manager            |
++--------------------+
+7 rows in set (0.71 sec)
+
 
 c) Mikä on suurin ja pienin palkka (salary) ? VIHJE: MIN, MAX
 
- SELECT MAX(salaries) FROM employees;
- Select MIN(salaries) FROM employees;
+ mysql>  SELECT  MAX(salary) FROM salaries;
++-------------+
+| MAX(salary) |
++-------------+
+|      158220 |
++-------------+
+mysql>  SELECT  MIN(salary) FROM salaries;
++-------------+
+| MIN(salary) |
++-------------+
+|       38623 |
 
 d) Mikä on keskimääräinen palkka ? VIHJE: AVG
 
-SELECT ROUND(AVG(salary), 2) FROM emoloyees;
+
+mysql> select AVG(salary) FROM salaries;
++-------------+
+| AVG(salary) |
++-------------+
+|  63810.7448 |
 
 e) Tulosta kaikki työntekijät, joiden sukunimi on Facello.
 
-SELECT gender, COUNT(*) FROM employees GROUP BY gender;
+mysql> SELECT first_name, last_name from employees WHERE last_name = 'Facello';
+...
+186 rows in set (0.15 sec)
 
-SELECT * FROM employees WHERE last_name = 'Facello';
 
 f) Kuinka moni työntekijä on syntynyt 1950-luvulla ?
 
-SELECT COUNT(*) FROM table_name WHERE YEAR(birthdate) = 1950;
+mysql> SELECT COUNT(*) FROM employees WHERE birth_date >= '1950-1-1' AND birth_date <= '1960-1-1';
++----------+
+| COUNT(*) |
++----------+
+|   182949 |
++----------+
 
 g) Montako miestä ja montako naista työntekijöissä on ?
+
+mysql> SELECT gender,count(*) FROM employees GROUP BY gender;
++--------+----------+
+| gender | count(*) |
++--------+----------+
+| M      |   179973 |
+| F      |   120051 |
++--------+----------+

@@ -1,20 +1,73 @@
 a) Tulosta DVD-elokuvien kielet (language) aakkosjärjestyksessä
 
-SELECT DVD, language FROM sakila.film ORDER BY language;
+mysql> SELECT name FROM language ORDER BY name;
++----------+
+| name     |
++----------+
+| English  |
+| French   |
+| German   |
+| Italian  |
+| Japanese |
+| Mandarin |
++----------+
+6 rows in set (0.00 sec)
 
 b) Tulosta kaikkien niiden näyttelijöiden elokuvat, joiden sukunimi on Temple.
 
-SELECT title FROM sakila.film 
-JOIN sakila.film_actor  ON film= film
-JOIN sakila.actor a ON actor"Temple";
+mysql> SELECT title FROM film INNER JOIN film_actor ON film.film_id = film_actor.film_id INNER JOIN actor ON film_actor.actor_id = actor.actor_id WHERE last_name LIKE "Temple";
++-------------------------+
+| title                   |
++-------------------------+
+| ACADEMY DINOSAUR        |
+| ALABAMA DEVIL           |
+| BALLOON HOMEWARD        |
+| BEACH HEARTBREAKERS     |
+| BUTTERFLY CHOCOLAT      |
+| CARRIE BUNCH            |
+| CASUALTIES ENCINO       |
+...
 
-Select from sakila where movies
 c) Tulosta elokuvassa "Ghost Groundhog" näytelleet näyttelijät.
-Select actors FROM sakila WHERE acted in "Ghost Groundhog";
+
+mysql> SELECT last_name, first_name from film INNER JOIN film_actor ON film.film_id = film_actor.film_id Inner Join actor on film_actor.actor_id = actor.actor_id Where title LIKE 'Ghost Groundhog';
++-----------+------------+
+| last_name | first_name |
++-----------+------------+
+| HARRIS    | DAN        |
+| TORN      | KENNETH    |
+| GARLAND   | KEVIN      |
+| TEMPLE    | RUSSELL    |
+| BALL      | RENEE      |
++-----------+------------+
+5 rows in set (0.01 sec)
+
 
 d) Montako kauhuelokuvaa ("Horror") tietokannassa on ?
 
-SELECT COUNT(*) FROM sakila.film WHERE category='Horror';
+mysql> SELECT COUNT(*) fROM film INNER JOIN film_category ON film.film_id = film_category.film_id INNER JOIN category ON film_category.category_id = category.category_id WHERE name LIKE 'Horror';
++----------+
+| COUNT(*) |
++----------+
+|       56 |
++----------+
+1 row in set (0.01 sec)
+
 
 e) Tulosta kaikki kauhuelokuvat.
-SELECT title FROM sakila.film WHERE category='Horror';
+
+mysql> SELECT title fROM film INNER JOIN film_category ON film.film_id = film_category.film_id INNER JOIN category ON film_category.category_id = category.category_id WHERE name  LIKE 'Horror';
++-----------------------------+
+| title                       |
++-----------------------------+
+| ACE GOLDFINGER              |
+| AFFAIR PREJUDICE            |
+| AIRPORT POLLOCK             |
+| ALABAMA DEVIL               |
+| ALI FOREVER                 |
+| ANALYZE HOOSIERS            |
+| ANYTHING SAVANNAH           |
+| ARABIA DOGMA                |
+| ARACHNOPHOBIA ROLLERCOASTER |
+| BEHAVIOR RUNAWAY
+...

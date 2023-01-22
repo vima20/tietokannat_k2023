@@ -1,44 +1,136 @@
 a) Tulosta kymmenen aakkosjärjestyksessä ensimmäisen työntekijän tiedot sukunimen mukaan lajiteltuna. Vihje: LIMIT rajoittaa tulostettavien tietojen määrän.
 
-SELECT lastname FROM employees ORDER BY lastname LIMIT 10;
+mysql> SELECT * FROM employees ORDER BY last_name LIMIT 10;
++--------+------------+------------+-----------+--------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  |
++--------+------------+------------+-----------+--------+------------+
+|  11761 | 1964-07-17 | Bartek     | Aamodt    | M      | 1991-06-12 |
+|  15427 | 1959-03-06 | Aluzio     | Aamodt    | M      | 1985-03-03 |
+|  18182 | 1963-02-23 | Dekang     | Aamodt    | F      | 1988-05-25 |
+|  16572 | 1956-11-26 | Matt       | Aamodt    | M      | 1987-06-16 |
+|  12791 | 1960-06-16 | Mokhtar    | Aamodt    | M      | 1994-08-14 |
+|  12516 | 1958-06-25 | Sreenivas  | Aamodt    | F      | 1990-03-06 |
+|  12982 | 1952-12-08 | Sachem     | Aamodt    | F      | 1992-01-11 |
+|  17400 | 1962-03-22 | Basim      | Aamodt    | F      | 1991-09-15 |
+|  19898 | 1957-03-09 | Vidar      | Aamodt    | M      | 1988-08-06 |
+|  17885 | 1954-02-01 | Takanari   | Aamodt    | M      | 1996-08-19 |
++--------+------------+------------+-----------+--------+------------+
+10 rows in set (0.41 sec)
 
 b) Sama kuten edellä, mutta sukunimen JA etunimen mukaan lajiteltuna.
 
-Select lastname, firstname from employees orgeer by lastname, firstname LIMIT 10;
+mysql> SELECT * FROM employees ORDER BY last_name, first_name LIMIT 10;
++--------+------------+------------+-----------+--------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  |
++--------+------------+------------+-----------+--------+------------+
+| 258641 | 1961-05-23 | Abdelkader | Aamodt    | M      | 1994-12-02 |
+| 258005 | 1953-02-17 | Adhemar    | Aamodt    | F      | 1991-01-21 |
+| 455773 | 1960-05-04 | Aemilian   | Aamodt    | M      | 1988-04-21 |
+| 436560 | 1959-03-16 | Alagu      | Aamodt    | F      | 1991-10-17 |
+| 266651 | 1959-05-28 | Aleksander | Aamodt    | F      | 1989-03-29 |
+| 487598 | 1962-03-03 | Alexius    | Aamodt    | M      | 1994-12-30 |
+| 216963 | 1960-07-16 | Alois      | Aamodt    | M      | 1995-08-24 |
+|  15427 | 1959-03-06 | Aluzio     | Aamodt    | M      | 1985-03-03 |
+| 100860 | 1964-06-20 | Amabile    | Aamodt    | F      | 1993-02-06 |
+| 107070 | 1954-04-24 | Anestis    | Aamodt    | M      | 1990-10-30 |
++--------+------------+------------+-----------+--------+------------+
+10 rows in set (0.45 sec)
 
 c) Tulosta viiden viimeksi palkatun työntekijän tiedot.
 
-SELECT * FROM employees ORDER BY id DESC LIMIT 5;
+
+ SELECT * FROM employees ORDER BY hire_date DESC LIMIT 5;
++--------+------------+------------+-----------+--------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  |
++--------+------------+------------+-----------+--------+------------+
+| 463807 | 1964-06-12 | Bikash     | Covnot    | M      | 2000-01-28 |
+| 428377 | 1957-05-09 | Yucai      | Gerlach   | M      | 2000-01-23 |
+| 499553 | 1954-05-06 | Hideyuki   | Delgrande | F      | 2000-01-22 |
+| 222965 | 1959-08-07 | Volkmar    | Perko     | F      | 2000-01-13 |
+|  47291 | 1960-09-09 | Ulf        | Flexer    | M      | 2000-01-12 |
++--------+------------+------------+-----------+--------+------------+
 
 Seuraavissa tehtävissä tarvitaan tietoja useammasta kuin yhdestä taulusta (JOIN).
 
 d) Kenellä on suurin palkka ?
 
-SELECT name as department_name, MAX(salary) as max_salary
-FROM employees 
-JOIN departments  ON department_id = d.id
-GROUP BY max_salary;
+mysql> SELECT first_name, last_name, salary FROM employees INNER JOIN salaries ON employees.emp_no = salaries.emp_no WHERE salary = (SELECT MAX(salary) FROM salaries);
++------------+-----------+--------+
+| first_name | last_name | salary |
++------------+-----------+--------+
+| Tokuyasu   | Pesch     | 158220 |
++------------+-----------+--------+
+1 row in set (20.27 sec)
 
 e) Kenellä on pienin palkka ?
 
-SELECT name as department_name, MIN(salary) as min_salary
-FROM employees 
-JOIN departments  ON department_id = d.id
-GROUP BY min_salary;
+mysql> SELECT first_name, last_name, salary FROM employees INNER JOIN salaries ON employees.emp_no = salaries.emp_no WHERE salary = (SELECT MIN(salary) FROM salaries);
++------------+-----------+--------+
+| first_name | last_name | salary |
++------------+-----------+--------+
+| Olivera    | Baek      |  38623 |
++------------+-----------+--------+
+1 row in set (28.75 sec)
 
 f) Tulosta työntekijät, jotka ansaitsevat yli 150000.
 
-SELECT * FROM employees WHERE salary > 15000;
+mysql> SELECT first_name, last_name,salary FROM employees INNER JOIN salaries ON employees.emp_no = salaries.emp_no WHERE salary >150000;
++------------+-----------+--------+
+| first_name | last_name | salary |
++------------+-----------+--------+
+| Tokuyasu   | Pesch     | 151115 |
+| Tokuyasu   | Pesch     | 153166 |
+| Tokuyasu   | Pesch     | 153458 |
+| Tokuyasu   | Pesch     | 157821 |
+| Tokuyasu   | Pesch     | 158220 |
+| Ibibia     | Junet     | 150345 |
+| Xiahua     | Whitcomb  | 151929 
+...
 
 g) Kuinka monta työntekijää työskentelee myynnissä (Sales) ? Entä markkinoinnissa (Marketing) ?
 
-SELECT COUNT(*) FROM employees WHERE department = 'sales';
-SELECT COUNT(*) FROM employees WHERE department = 'marketing';
+mysql> SELECT COUNT(*) FROM dept_emp INNER JOIN departments ON dept_emp.dept_no = departments.dept_no WHERE departments.dept_name LIKE 'Sales'; 
++----------+
+| COUNT(*) |
++----------+
+|    52245 |
++----------+
+1 row in set (0.03 sec)
+
+mysql> SELECT COUNT(*) FROM dept_emp INNER JOIN departments ON dept_emp.dept_no = departments.dept_no WHERE departments.dept_name LIKE 'Marketing';
++----------+
+| COUNT(*) |
++----------+
+|    20211 |
++----------+
+1 row in set (0.02 sec)
+
 
 h) Tulosta kaikkien osastonjohtajien (Department Managers) etunimi, sukunimi ja osasto, jolla työskentelee.
 
-SELECT firstname, lastname, department FROM employees WHERE role = ' Department Manager';
+mysql> SELECT first_name, last_name, title, dept_name FROM employees INNER JOIN titles ON employees.emp_no = titles.emp_no INNER JOIN dept_emp ON employees.emp_no = dept_emp.emp_no INNER JOIN departments ON dept_emp.dept_no = departments.dept_no WHERE title LIKE 'Manager';
++-------------+--------------+---------+--------------------+
+| first_name  | last_name    | title   | dept_name          |
++-------------+--------------+---------+--------------------+
+| Margareta   | Markovitch   | Manager | Marketing          |
+| Ebru        | Alpin        | Manager | Finance            |
+| Shirish     | Ossenbruggen | Manager | Human Resources    |...
 
 i) Mikä on myynnissä työskentelevien keskipalkka ? Entä markkinoinnissa ?
-SELECT AVG(salary) FROM employees WHERE department = 'sales';
-SELECT AVG(salary) FROM employees WHERE department = 'marketing';
+
+mysql> SELECT AVG(salary) FROM salaries INNER JOIN employees ON salaries.emp_no = employees.emp_no INNER JOIN dept_emp ON employees.emp_no = dept_emp.emp_no INNER JOIN departments ON dept_emp.dept_no = departments.dept_no WHERE dept_name LIKE 'Sales';
++-------------+
+| AVG(salary) |
++-------------+
+|  80667.6058 |
++-------------+
+1 row in set (5.93 sec)
+
+
+mysql> SELECT AVG(salary) FROM salaries INNER JOIN employees ON salaries.emp_no = employees.emp_no INNER JOIN dept_emp ON employees.emp_no = dept_emp.emp_no INNER JOIN departments ON dept_emp.dept_no = departments.dept_no WHERE dept_name LIKE 'marketing';
++-------------+
+| AVG(salary) |
++-------------+
+|  71913.2000 |
++-------------+
+1 row in set (3.90 sec)

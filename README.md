@@ -1,1 +1,1 @@
-# tietokannat_k2023
+Minun projekti on draivi applikaaton joka talleentaa draivit nettiin ja kertoo sivusuunnaan. Pystyy myös kertomaan kun tulee pisin draivi. Käytän backendiin Visual studio codea ja frontendiin qt:ta ja andriod studio flamingoa. Tietokantaan suunitteluun äytän Mysql workebenchiä.
